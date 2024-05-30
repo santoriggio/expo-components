@@ -15,8 +15,3 @@ coverage/
 package-lock.json
 yarn.lock
 
-# File e directory specifici da includere
-src/
-package.json
-README.md
-
