@@ -37,7 +37,7 @@ export default function Text(props: PropsWithChildren<TextProps>) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [colors.isDark]);
+  }, [colors.text, color]);
 
   return (
     <RNText {...props} style={[styles.style, props.style]}>

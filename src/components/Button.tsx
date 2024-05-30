@@ -16,12 +16,12 @@ type ButtonProps = {
 } & SpacingProps;
 
 export default function Button(props: ButtonProps) {
-  const { title, role = 'primary', type = 'filled' } = props;
+  const { title, role = 'primary', type = 'filled', active = true } = props;
   const { radius, colors } = useStyles();
   const tint = colors[role] || colors.primary;
 
   const onPress = () => {
-    if (props.loading || props.active === false) return;
+    if (props.loading || active === false) return;
 
     if (typeof props.onPress === 'function') {
       return props.onPress(props);
@@ -48,7 +48,7 @@ export default function Button(props: ButtonProps) {
         opacity: type === 'filled' ? 1 : 0.25,
       },
     });
-  }, [tint]);
+  }, [tint, radius]);
 
   return (
     <TouchableOpacity

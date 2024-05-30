@@ -1,30 +1,57 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { i18n } from 'expo-components';
-import { storage } from '../../src/utils';
-
+import {
+  ThemeProvider,
+  Text,
+  Box,
+  useTheme,
+  useStyles,
+  config,
+  Button,
+} from 'expo-components';
+import { SafeAreaView } from 'react-native';
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {}, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result:aaa {result}</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemeProvider>
+        <Example />
+      </ThemeProvider>
+    </SafeAreaView>
   );
 }
+function Example() {
+  const { colors } = useStyles();
+  const { theme, setTheme } = useTheme();
+  const [themes, setThemes] = React.useState([]);
+  React.useEffect(() => {
+    const t = config.getProperty('themes');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+    setThemes(Object.keys(t));
+  }, []);
+
+  return (
+    <Box padding="m" backgroundColor={'red'}>
+      {themes.map((t) => {
+        return (
+          <Button
+            title={t}
+            onPress={() => {
+              setTheme(t);
+              // alert(t);
+            }}
+            marginBottom="m"
+          />
+        );
+      })}
+      <Text>{theme}</Text>
+      {Object.keys(colors).map((color) => {
+        return (
+          <Text color={colors[color]}>
+
+            {color}: {JSON.stringify(colors[color])}
+          </Text>
+        );
+      })}
+    </Box>
+  );
+}

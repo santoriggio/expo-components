@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
-import { ColorValue, useColorScheme } from 'react-native';
+import { Alert, ColorValue } from 'react-native';
+import { useTheme } from '../utils/themeProvider';
+import config from '../utils/config';
 
 export type Colors = {
   primary: ColorValue;
@@ -12,7 +14,7 @@ export type Colors = {
   gray: ColorValue;
 };
 export type Styles = {
-  colors: Theme;
+  colors: Partial<Theme>;
   spacing: typeof spacingSizes;
   radius: number;
 };
@@ -32,23 +34,6 @@ export type Theme = {
   background: ColorValue;
   border: ColorValue;
 } & Partial<Colors>;
-const theme: Record<'light' | 'dark', Theme> = {
-  light: {
-    isDark: false,
-    text: '#000',
-    card: '#f5f5f7',
-    background: '#FFFFFF',
-    border: '#efeff4',
-  },
-  dark: {
-    isDark: true,
-    text: '#fff',
-    card: '#000000',
-    background: '#161618',
-    border: '#212124',
-  },
-};
-
 export const fontSizes = {
   'xs': 12,
   's': 14,
@@ -60,25 +45,19 @@ export const fontSizes = {
 };
 
 export default function useStyles() {
-  const colorScheme = useColorScheme() || 'light';
+  const { theme } = useTheme();
   const styles: Styles = useMemo(() => {
+    const themes = config.getProperty('themes');
+    const colors = config.getProperty('colors');
     return {
       colors: {
-        primary: '#0074E4',
-        secondary: '#7D53DE',
-        success: '#4cd964',
-        danger: '#FF3B30',
-        info: '#006ee6',
-        link: '#0000EE',
-        warning: '#ffcc00',
-        gray: '#9C9C9C',
-
-        ...theme[colorScheme],
+        ...colors,
+        ...themes[theme],
       },
       spacing: spacingSizes,
       radius,
     };
-  }, [colorScheme]);
+  }, [theme]);
 
   return styles;
 }

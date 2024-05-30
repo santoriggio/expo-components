@@ -1,5 +1,5 @@
 import { StyleSheet, View, ColorValue, ViewProps } from 'react-native';
-import useStyles, { Styles, spacingSizes } from '../hooks/useStyles';
+import  { Styles, spacingSizes } from '../hooks/useStyles';
 import { PropsWithChildren, useMemo } from 'react';
 
 type BoxProps = {
@@ -26,7 +26,7 @@ export type SpacingProps = {
 
 export default function Box(props: PropsWithChildren<BoxProps>) {
   const { backgroundColor } = props;
-  const { colors } = useStyles();
+  // const { colors } = useStyles();
   const styles = useMemo(() => {
     const bg = backgroundColor || undefined;
     return StyleSheet.create({
@@ -45,7 +45,7 @@ export default function Box(props: PropsWithChildren<BoxProps>) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [colors.isDark]);
+  }, [backgroundColor]);
   return (
     <View {...props} style={[styles.container, props.style]}>
       {props.children}
