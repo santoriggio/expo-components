@@ -10,6 +10,19 @@ import {
   Button,
 } from 'expo-components';
 import { SafeAreaView } from 'react-native';
+config.init({
+  themes: {
+    'super-mario': {
+      success: 'red',
+    },
+  },
+  colors: {
+    primary: 'violet',
+  },
+  onChangeTheme: (theme: string) => {
+    console.log(theme);
+  },
+});
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -30,7 +43,7 @@ function Example() {
   }, []);
 
   return (
-    <Box padding="m" backgroundColor={'red'}>
+    <Box padding="m">
       {themes.map((t) => {
         return (
           <Button
@@ -46,10 +59,12 @@ function Example() {
       <Text>{theme}</Text>
       {Object.keys(colors).map((color) => {
         return (
-          <Text color={colors[color]}>
-
-            {color}: {JSON.stringify(colors[color])}
-          </Text>
+          <Box horizontal>
+            <Text>{color}:</Text>
+            <Text style={{ backgroundColor: colors[color] }}>
+              {JSON.stringify(colors[color])}
+            </Text>
+          </Box>
         );
       })}
     </Box>

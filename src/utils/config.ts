@@ -1,11 +1,16 @@
 import { Colors, Theme } from '../hooks/useStyles';
+import deepMerge, { DeepPartial } from './deepMerge';
+import Store from './store';
 
 type Config = {
   themes: Record<string, Theme>;
   colors: Colors;
+  onChangeTheme?: (theme:string)=> void;
 };
+//Create a deep partial type
 
 class ConfigClass {
+  private _store: Store = new Store('expo-helpers-config-store');
   private config: Config = {
     themes: {
       light: {
@@ -42,13 +47,19 @@ class ConfigClass {
       gray: '#9C9C9C',
     },
   };
-  constructor() { }
+  constructor() {}
   public getProperty<K extends keyof Config>(key: K): Config[K] {
     if (typeof this.config[key] === 'undefined') {
       throw Error('Key not exists');
     }
 
     return this.config[key];
+  }
+  public init(config: DeepPartial<Config>) {
+    this.config = deepMerge(this.config, config);
+  }
+  get store() {
+    return this._store;
   }
 }
 
