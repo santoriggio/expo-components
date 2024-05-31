@@ -8,6 +8,7 @@ import {
   useStyles,
   config,
   Button,
+  TextInput,
 } from 'expo-components';
 import { SafeAreaView } from 'react-native';
 config.init({
@@ -17,7 +18,7 @@ config.init({
     },
   },
   colors: {
-    primary: 'violet',
+    primary: '#7F00FF',
   },
   onChangeTheme: (theme: string) => {
     console.log(theme);
@@ -44,6 +45,10 @@ function Example() {
 
   return (
     <Box padding="m">
+      <TextInput
+        size="l"
+        placeholder="Scrivi qui..."
+      />
       {themes.map((t) => {
         return (
           <Button
