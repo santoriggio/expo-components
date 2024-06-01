@@ -2,10 +2,10 @@ import { Colors, Theme } from '../hooks/useStyles';
 import deepMerge, { DeepPartial } from './deepMerge';
 import Store from './store';
 
-type Config = {
+export type Config = {
   themes: Record<string, Theme>;
   colors: Colors;
-  onChangeTheme?: (theme:string)=> void;
+  onChangeTheme?: (theme: string) => void;
 };
 //Create a deep partial type
 

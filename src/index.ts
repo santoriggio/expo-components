@@ -16,5 +16,5 @@ export {
   config,
   useStyles,
   deepMerge,
-  TextInput
+  TextInput,
 };

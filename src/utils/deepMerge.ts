@@ -1,5 +1,3 @@
-
-
 type Primitive = string | number | boolean | null | undefined;
 
 // Utility type to define a deep partial object
@@ -24,7 +22,10 @@ function deepMerge<T extends {}>(target: T, source: DeepPartial<T>): T {
         if (!(key in target)) {
           (output as any)[key] = source[key];
         } else {
-          (output as any)[key] = deepMerge((target as any)[key], source[key] as any);
+          (output as any)[key] = deepMerge(
+            (target as any)[key],
+            source[key] as any
+          );
         }
       } else {
         (output as any)[key] = source[key];
@@ -34,4 +35,4 @@ function deepMerge<T extends {}>(target: T, source: DeepPartial<T>): T {
 
   return output;
 }
-export default deepMerge
+export default deepMerge;
