@@ -1,30 +1,46 @@
-import { storage } from './store';
+import config from './config';
 
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
 
 type Options =
   | {
-    count?: number;
-  }
+      count?: number;
+    }
   | Record<string, any>;
-
+type Init = {
+  translations: Translations;
+  onChangeLocale?: (locale: string) => void;
+};
 class I18n {
   public translations: Translations = {};
   //public locale: string = "en";
-  private _locale: string = storage.get('locale') || 'en';
+  private _locale: string = config.store.get('locale') || 'en';
   private _translation: Translation = {};
+  private _onChangeLocale: Init['onChangeLocale'] | undefined;
   constructor(translations: Translations) {
     this.translations = translations;
   }
 
+  public init(init_config: Init) {
+    this.translations = init_config.translations;
+    this._onChangeLocale = init_config.onChangeLocale;
+    return null;
+  }
   set locale(value: string) {
+    const translation = this.translations[value];
+
+    if (typeof translation === 'undefined') {
+      throw Error('Locale not exists');
+    }
+
     this._locale = value;
+    this._translation = translation;
 
-    // const uid = firebaseAuth().currentUser.uid;
-    // firestore().doc(`users/${uid}`).update({locale:value});
-
-    storage.set('locale', value);
+    config.store.set('locale', value);
+    if (typeof this._onChangeLocale !== 'undefined') {
+      this._onChangeLocale(value);
+    }
   }
 
   get locale(): string {
@@ -37,10 +53,9 @@ class I18n {
     if (typeof this.translations[this.locale] === 'undefined') {
       return key;
     }
-    const formattedString= this.findFormattedString(key, options);
-    if(formattedString === null){
+    const formattedString = this.findFormattedString(key, options);
+    if (formattedString === null) {
       return key;
-
     }
 
     return this.sub(formattedString, options);

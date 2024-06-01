@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Alert, ColorValue } from 'react-native';
+import { ColorValue } from 'react-native';
 import { useTheme } from '../utils/themeProvider';
 import config from '../utils/config';
 
