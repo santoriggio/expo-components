@@ -1,6 +1,6 @@
-import { StyleSheet, View, ColorValue, ViewProps } from 'react-native';
-import { Styles, spacingSizes } from '../hooks/useStyles';
-import { PropsWithChildren, useMemo } from 'react';
+import { StyleSheet, View, ColorValue, ViewProps } from "react-native";
+import { Styles, spacingSizes } from "../hooks/useStyles";
+import { PropsWithChildren, useMemo } from "react";
 
 type BoxProps = {
   backgroundColor?: ColorValue;
@@ -10,18 +10,18 @@ type BoxProps = {
 
 export type SpacingProps = {
   //Margin
-  margin?: keyof Styles['spacing'];
-  marginBottom?: keyof Styles['spacing'];
-  marginTop?: keyof Styles['spacing'];
-  marginLeft?: keyof Styles['spacing'];
-  marginRight?: keyof Styles['spacing'];
+  margin?: keyof Styles["spacing"];
+  marginBottom?: keyof Styles["spacing"];
+  marginTop?: keyof Styles["spacing"];
+  marginLeft?: keyof Styles["spacing"];
+  marginRight?: keyof Styles["spacing"];
   //Spacing
 
-  padding?: keyof Styles['spacing'];
-  paddingBottom?: keyof Styles['spacing'];
-  paddingTop?: keyof Styles['spacing'];
-  paddingLeft?: keyof Styles['spacing'];
-  paddingRight?: keyof Styles['spacing'];
+  padding?: keyof Styles["spacing"];
+  paddingBottom?: keyof Styles["spacing"];
+  paddingTop?: keyof Styles["spacing"];
+  paddingLeft?: keyof Styles["spacing"];
+  paddingRight?: keyof Styles["spacing"];
 };
 
 export default function Box(props: PropsWithChildren<BoxProps>) {
@@ -31,7 +31,7 @@ export default function Box(props: PropsWithChildren<BoxProps>) {
     const bg = backgroundColor || undefined;
     return StyleSheet.create({
       container: {
-        flexDirection: horizontal ? 'row' : 'column',
+        flexDirection: horizontal ? "row" : "column",
         backgroundColor: bg,
         margin: props.margin && spacingSizes[props.margin],
         marginBottom: props.marginBottom && spacingSizes[props.marginBottom],
@@ -46,7 +46,7 @@ export default function Box(props: PropsWithChildren<BoxProps>) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [backgroundColor]);
+  }, [backgroundColor, props, horizontal]);
   return (
     <View {...props} style={[styles.container, props.style]}>
       {props.children}

@@ -1,31 +1,31 @@
 // import { getLocales } from "expo-localization";
 
-import i18n from './i18n';
+import i18n from "./i18n";
 
 const obj = {
   LT: {
-    timeStyle: 'short',
+    timeStyle: "short",
   },
   LTS: {
-    timeStyle: 'medium',
+    timeStyle: "medium",
   },
   lL: {
-    dateStyle: 'short',
-    timeStyle: 'short',
+    dateStyle: "short",
+    timeStyle: "short",
   },
   L: {
-    dateStyle: 'short',
+    dateStyle: "short",
   },
   LL: {
-    dateStyle: 'medium',
+    dateStyle: "medium",
   },
   LLL: {
-    dateStyle: 'medium',
-    timeStyle: 'short',
+    dateStyle: "medium",
+    timeStyle: "short",
   },
   LLLL: {
-    dateStyle: 'long',
-    timeStyle: 'short',
+    dateStyle: "long",
+    timeStyle: "short",
   },
 } as const;
 

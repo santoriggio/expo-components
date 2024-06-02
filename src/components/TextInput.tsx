@@ -3,10 +3,10 @@ import {
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
   StyleSheet,
-} from 'react-native';
-import useStyles, { fontSizes, spacingSizes } from '../hooks/useStyles';
-import { useMemo } from 'react';
-import { SpacingProps } from './Box';
+} from "react-native";
+import useStyles, { fontSizes, spacingSizes } from "../hooks/useStyles";
+import { useMemo } from "react";
+import { SpacingProps } from "./Box";
 type TextInputProps = {
   size?: keyof typeof fontSizes;
   color?: ColorValue;
@@ -34,7 +34,7 @@ export default function TextInput(props: TextInputProps & RNTextInputProps) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [color, size, colors.text]);
+  }, [color, size, colors.text, props]);
 
   return (
     <RNTextInput

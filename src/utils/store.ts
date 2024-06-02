@@ -1,4 +1,4 @@
-import { MMKV } from 'react-native-mmkv';
+import { MMKV } from "react-native-mmkv";
 
 class Store {
   mmkv_store: MMKV;
@@ -10,7 +10,7 @@ class Store {
   }
 
   set(key: string, value: any) {
-    if (typeof value === 'undefined') {
+    if (typeof value === "undefined") {
       this.remove(key);
     } else {
       this.mmkv_store.set(key.toString(), JSON.stringify(value));
@@ -18,15 +18,15 @@ class Store {
   }
 
   get(key: string) {
-    if (typeof key !== 'undefined') {
+    if (typeof key !== "undefined") {
       const toReturn = this.mmkv_store.getString(key.toString());
 
-      if (typeof toReturn !== 'undefined') return JSON.parse(toReturn);
+      if (typeof toReturn !== "undefined") return JSON.parse(toReturn);
     }
   }
 
   remove(key: string) {
-    if (typeof key !== 'undefined') {
+    if (typeof key !== "undefined") {
       this.mmkv_store.delete(key.toString());
     }
   }
@@ -39,6 +39,6 @@ class Store {
     this.mmkv_store.clearAll();
   }
 }
-const storage = new Store('default');
+const storage = new Store("default");
 export { storage };
 export default Store;

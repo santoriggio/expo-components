@@ -1,5 +1,5 @@
-import config from './config';
-
+import config from "./config";
+import * as Localization from "expo-localization";
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
 
@@ -15,11 +15,14 @@ type Init = {
 class I18n {
   public translations: Translations = {};
   //public locale: string = "en";
-  private _locale: string = config.store.get('locale') || 'en';
+  //private locales: Locale[] = [];
+  private _locale: string = config.store.get("locale") || "en";
   private _translation: Translation = {};
-  private _onChangeLocale: Init['onChangeLocale'] | undefined;
+  private _onChangeLocale: Init["onChangeLocale"] | undefined;
   constructor(translations: Translations) {
     this.translations = translations;
+    const locales = Localization.getLocales();
+    console.log(locales);
   }
 
   public init(init_config: Init) {
@@ -30,27 +33,27 @@ class I18n {
   set locale(value: string) {
     const translation = this.translations[value];
 
-    if (typeof translation === 'undefined') {
-      throw Error('Locale not exists');
+    if (typeof translation === "undefined") {
+      throw Error("Locale not exists");
     }
 
     this._locale = value;
     this._translation = translation;
 
-    config.store.set('locale', value);
-    if (typeof this._onChangeLocale !== 'undefined') {
+    config.store.set("locale", value);
+    if (typeof this._onChangeLocale !== "undefined") {
       this._onChangeLocale(value);
     }
   }
 
   get locale(): string {
-    if (typeof this._locale === 'undefined') return 'en';
+    if (typeof this._locale === "undefined") return "en";
     return this._locale;
   }
 
   public t(key: string, options: Options = {}) {
-    if (typeof key !== 'string') return '';
-    if (typeof this.translations[this.locale] === 'undefined') {
+    if (typeof key !== "string") return "";
+    if (typeof this.translations[this.locale] === "undefined") {
       return key;
     }
     const formattedString = this.findFormattedString(key, options);
@@ -81,30 +84,30 @@ class I18n {
   ): string | null {
     let formattedString: any = null;
 
-    if (key.includes('.')) {
+    if (key.includes(".")) {
       const splitted = key
-        .split('.')
-        .filter((str) => typeof str === 'string' && str.length > 0);
+        .split(".")
+        .filter((str) => typeof str === "string" && str.length > 0);
 
       if (
-        typeof splitted[0] !== 'undefined' &&
+        typeof splitted[0] !== "undefined" &&
         this._translation[splitted[0]]
       ) {
         formattedString = this._translation[splitted[0]];
       }
 
       for (let i = 1; i < splitted.length; i++) {
-        if (typeof formattedString === 'string') break;
+        if (typeof formattedString === "string") break;
 
         if (
-          typeof formattedString === 'object' &&
+          typeof formattedString === "object" &&
           !Array.isArray(formattedString)
         ) {
           //Se è oggetto e NON è un array
           const splittedKey = splitted[i];
 
           if (
-            typeof splittedKey !== 'undefined' &&
+            typeof splittedKey !== "undefined" &&
             formattedString[splittedKey]
           ) {
             formattedString = formattedString[splittedKey];
@@ -113,41 +116,41 @@ class I18n {
       }
     }
 
-    if (typeof formattedString === 'string') {
+    if (typeof formattedString === "string") {
       return formattedString;
     }
 
     if (
-      typeof formattedString === 'object' &&
+      typeof formattedString === "object" &&
       !Array.isArray(formattedString)
     ) {
       //check for count option
     }
 
     if (formattedString === null) {
-      if (typeof this._translation[key] === 'undefined') {
+      if (typeof this._translation[key] === "undefined") {
         return null;
       }
 
       formattedString = this._translation[key];
 
-      if (typeof formattedString === 'object') {
-        if (typeof options.count === 'number') {
+      if (typeof formattedString === "object") {
+        if (typeof options.count === "number") {
           if (
             options.count === 0 &&
-            typeof formattedString.zero !== 'undefined'
+            typeof formattedString.zero !== "undefined"
           ) {
             return formattedString.zero;
           }
 
           if (
             options.count === 1 &&
-            typeof formattedString.one !== 'undefined'
+            typeof formattedString.one !== "undefined"
           ) {
             return formattedString.one;
           }
 
-          if (typeof formattedString.other !== 'undefined') {
+          if (typeof formattedString.other !== "undefined") {
             return formattedString.other;
           }
         }

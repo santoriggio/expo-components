@@ -6,7 +6,7 @@ export type DeepPartial<T> = {
 };
 
 function isObject(item: any): boolean {
-  return item && typeof item === 'object' && !Array.isArray(item);
+  return item && typeof item === "object" && !Array.isArray(item);
 }
 
 function deepMerge<T extends {}>(target: T, source: DeepPartial<T>): T {

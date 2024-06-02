@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { ColorValue } from 'react-native';
-import { useTheme } from '../utils/themeProvider';
-import config from '../utils/config';
+import { useMemo } from "react";
+import { ColorValue } from "react-native";
+import { useTheme } from "../utils/themeProvider";
+import config from "../utils/config";
 
 export type Colors = {
   primary: ColorValue;
@@ -35,20 +35,20 @@ export type Theme = {
   border: ColorValue;
 } & Partial<Colors>;
 export const fontSizes = {
-  'xs': 12,
-  's': 14,
-  'm': 16,
-  'l': 18,
-  'xl': 20,
-  '2xl': 22,
-  '3xl': 24,
+  "xs": 12,
+  "s": 14,
+  "m": 16,
+  "l": 18,
+  "xl": 20,
+  "2xl": 22,
+  "3xl": 24,
 };
 
 export default function useStyles() {
   const { theme } = useTheme();
   const styles: Styles = useMemo(() => {
-    const themes = config.getProperty('themes');
-    const colors = config.getProperty('colors');
+    const themes = config.getProperty("themes");
+    const colors = config.getProperty("colors");
     return {
       colors: {
         ...colors,

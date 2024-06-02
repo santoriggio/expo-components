@@ -2,10 +2,10 @@ import {
   Text as RNText,
   TextProps as RNTextProps,
   StyleSheet,
-} from 'react-native';
-import { SpacingProps } from './Box';
-import { PropsWithChildren, useMemo } from 'react';
-import useStyles, { fontSizes, spacingSizes } from '../hooks/useStyles';
+} from "react-native";
+import { SpacingProps } from "./Box";
+import { PropsWithChildren, useMemo } from "react";
+import useStyles, { fontSizes, spacingSizes } from "../hooks/useStyles";
 
 type TextProps = {
   color?: string;
@@ -15,7 +15,7 @@ type TextProps = {
   RNTextProps;
 
 export default function Text(props: PropsWithChildren<TextProps>) {
-  const { color, size = 'm', bold } = props;
+  const { color, size = "m", bold } = props;
   const { colors } = useStyles();
 
   const styles = useMemo(() => {
@@ -23,7 +23,7 @@ export default function Text(props: PropsWithChildren<TextProps>) {
       style: {
         color: color || colors.text,
         fontSize: fontSizes[size] || fontSizes.m,
-        fontWeight: bold ? 'bold' : undefined,
+        fontWeight: bold ? "bold" : undefined,
         margin: props.margin && spacingSizes[props.margin],
         marginBottom: props.marginBottom && spacingSizes[props.marginBottom],
         marginTop: props.marginTop && spacingSizes[props.marginTop],
@@ -37,7 +37,7 @@ export default function Text(props: PropsWithChildren<TextProps>) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [colors.text, color]);
+  }, [colors.text, color, props, size, bold]);
 
   return (
     <RNText {...props} style={[styles.style, props.style]}>
