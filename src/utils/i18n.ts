@@ -1,13 +1,18 @@
 import config from "./config";
 import * as Localization from "expo-localization";
+
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
 
-type Options =
+/* type Options =
   | {
-      count?: number;
-    }
-  | Record<string, any>;
+    count?: number;
+  }
+  | Record<string, any>; */
+type Options = {
+  count?: number;
+  [key: string]: any;
+};
 type Init = {
   translations: Translations;
   onChangeLocale?: (locale: string) => void;

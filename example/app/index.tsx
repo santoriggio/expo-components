@@ -1,4 +1,4 @@
-import { Box, Text } from 'expo-helpers';
+import { Box, Text } from "expo-helpers";
 export default function Page() {
   return (
     <Box>
