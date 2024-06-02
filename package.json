@@ -154,6 +154,7 @@
     ]
   },
   "dependencies": {
+    "expo-localization": "^15.0.3",
     "react-native-mmkv": "^2.12.2"
   }
 }
