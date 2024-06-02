@@ -3,7 +3,7 @@
   "compilerOptions": {
     // Avoid expo-cli auto-generating a tsconfig
     "paths": {
-      "expo-components": ["../src/index"]
+      "expo-helpers": ["../src/index"]
     }
   }
 }
