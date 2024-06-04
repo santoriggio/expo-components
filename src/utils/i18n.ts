@@ -1,6 +1,5 @@
 import config from "./config";
-import * as Localization from "expo-localization";
-
+import { getLocales } from "expo-localization";
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
 
@@ -26,8 +25,8 @@ class I18n {
   private _onChangeLocale: Init["onChangeLocale"] | undefined;
   constructor(translations: Translations) {
     this.translations = translations;
-    const locales = Localization.getLocales();
-    console.log(locales);
+    const locales = getLocales();
+    console.log("Locales:", locales);
   }
 
   public init(init_config: Init) {

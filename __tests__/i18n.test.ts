@@ -6,7 +6,7 @@
  *
  * */
 
-import { i18n } from "../src/utils";
+import i18n from "../src/utils/i18n";
 
 const translationsIT = {
   welcomeMessage: "Benvenuto!",

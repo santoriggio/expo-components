@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "npx expo start --dev-client",
     "android": "expo run:android",
-    "ios": "expo run:ios",
-    "prebuild": "expo prebuild",
+    "ios": "npx expo run:ios",
+    "prebuild": "npx expo prebuild",
     "pod": "cd ios && pod install && cd ..",
     "clean": "rm -rf ios android node_modules",
-    "expo-doctor": "expo-doctor",
+    "expo-doctor": "npx expo-doctor",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "expo-constants": "^16.0.2",
     "expo-dev-client": "^4.0.15",
     "expo-linking": "^6.3.1",
+    "expo-localization": "~15.0.3",
     "expo-router": "^3.5.14",
     "expo-status-bar": "^1.12.1",
     "react": "18.2.0",
