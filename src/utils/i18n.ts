@@ -1,5 +1,4 @@
 import config from "./config";
-import { getLocales } from "expo-localization";
 
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
@@ -13,10 +12,12 @@ type Options = {
   count?: number;
   [key: string]: any;
 };
+
 type Init = {
   translations: Translations;
   onChangeLocale?: (locale: string) => void;
 };
+
 class I18n {
   public translations: Translations = {};
   //public locale: string = "en";
@@ -24,17 +25,19 @@ class I18n {
   private _locale: string = config.store.get("locale") || "en";
   private _translation: Translation = {};
   private _onChangeLocale: Init["onChangeLocale"] | undefined;
+
   constructor(translations: Translations) {
     this.translations = translations;
-    const locales = getLocales();
-    console.log("Locales:", locales);
+    // const locales = getLocales();
+    // console.log("Locales:", locales);
   }
 
   public init(init_config: Init) {
     this.translations = init_config.translations;
+    this._translation = init_config.translations[this._locale];
     this._onChangeLocale = init_config.onChangeLocale;
-    return null;
   }
+
   set locale(value: string) {
     const translation = this.translations[value];
 
@@ -58,9 +61,7 @@ class I18n {
 
   public t(key: string, options: Options = {}) {
     if (typeof key !== "string") return "";
-    if (typeof this.translations[this.locale] === "undefined") {
-      return key;
-    }
+
     const formattedString = this.findFormattedString(key, options);
     if (formattedString === null) {
       return key;
@@ -83,10 +84,14 @@ class I18n {
       return match;
     });
   }
+
   private findFormattedString(
     key: string,
     options: Options = {}
   ): string | null {
+    if (typeof this._translation === "undefined") {
+      return null;
+    }
     let formattedString: any = null;
 
     if (key.includes(".")) {
