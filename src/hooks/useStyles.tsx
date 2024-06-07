@@ -1,17 +1,16 @@
 import { useMemo } from "react";
-import { ColorValue } from "react-native";
 import { useTheme } from "../utils/themeProvider";
 import config from "../utils/config";
 
 export type Colors = {
-  primary: ColorValue;
-  secondary: ColorValue;
-  info: ColorValue;
-  warning: ColorValue;
-  success: ColorValue;
-  danger: ColorValue;
-  link: ColorValue;
-  gray: ColorValue;
+  primary: string;
+  secondary: string;
+  info: string;
+  warning: string;
+  success: string;
+  danger: string;
+  link: string;
+  gray: string;
 };
 export type Styles = {
   colors: Partial<Theme>;
@@ -29,10 +28,10 @@ export const spacingSizes = {
 export const radius = 12;
 export type Theme = {
   isDark: boolean;
-  text: ColorValue;
-  card: ColorValue;
-  background: ColorValue;
-  border: ColorValue;
+  text: string;
+  card: string;
+  background: string;
+  border: string;
 } & Partial<Colors>;
 export const fontSizes = {
   "xs": 12,

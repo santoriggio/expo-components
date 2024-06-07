@@ -2,11 +2,11 @@
   "name": "expo-helpers",
   "version": "0.1.1",
   "description": "Expo helpers",
-  "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
   "main": "lib/module/index",
   "react-native": "src/index",
   "source": "src/index",
+  "type": "module",
   "files": [
     "src",
     "lib",
@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "example": "yarn workspace expo-components-example",
-    "test": "jest",
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
@@ -74,7 +74,10 @@
     "react-native": "0.74.1",
     "react-native-builder-bob": "^0.23.2",
     "release-it": "^15.0.0",
-    "typescript": "^5.2.2"
+    "specio": "^1.0.1",
+    "ts-jest": "^29.1.4",
+    "ts-jest-resolver": "^2.0.1",
+    "typescript": "^5.4.5"
   },
   "resolutions": {
     "@types/react": "^18.2.44"

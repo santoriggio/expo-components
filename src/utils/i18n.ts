@@ -1,5 +1,6 @@
 import config from "./config";
 import { getLocales } from "expo-localization";
+
 type Translation = Record<string, any>;
 type Translations = Record<string, Translation>;
 

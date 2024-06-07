@@ -1,12 +1,17 @@
-import { StyleSheet, View, ColorValue, ViewProps } from "react-native";
-import { Styles, spacingSizes } from "../hooks/useStyles";
+import {
+  StyleSheet,
+  ColorValue,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
+import useStyles, { Styles, spacingSizes } from "../hooks/useStyles";
 import { PropsWithChildren, useMemo } from "react";
 
 type BoxProps = {
   backgroundColor?: ColorValue;
   horizontal?: boolean;
 } & SpacingProps &
-  ViewProps;
+  TouchableOpacityProps;
 
 export type SpacingProps = {
   //Margin
@@ -26,13 +31,19 @@ export type SpacingProps = {
 
 export default function Box(props: PropsWithChildren<BoxProps>) {
   const { backgroundColor, horizontal } = props;
-  // const { colors } = useStyles();
+  const { colors } = useStyles();
+  const disabled = !(
+    typeof props.onPress === "function" ||
+    typeof props.onLongPress === "function"
+  );
+
   const styles = useMemo(() => {
     const bg = backgroundColor || undefined;
     return StyleSheet.create({
       container: {
         flexDirection: horizontal ? "row" : "column",
         backgroundColor: bg,
+        borderColor: colors.border,
         margin: props.margin && spacingSizes[props.margin],
         marginBottom: props.marginBottom && spacingSizes[props.marginBottom],
         marginTop: props.marginTop && spacingSizes[props.marginTop],
@@ -46,10 +57,14 @@ export default function Box(props: PropsWithChildren<BoxProps>) {
         paddingRight: props.paddingRight && spacingSizes[props.paddingRight],
       },
     });
-  }, [backgroundColor, props, horizontal]);
+  }, [backgroundColor, props, horizontal, colors.border]);
   return (
-    <View {...props} style={[styles.container, props.style]}>
+    <TouchableOpacity
+      disabled={disabled}
+      {...props}
+      style={[styles.container, props.style]}
+    >
       {props.children}
-    </View>
+    </TouchableOpacity>
   );
 }
