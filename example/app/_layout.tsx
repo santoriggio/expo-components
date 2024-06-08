@@ -1,5 +1,8 @@
 import { Stack } from "expo-router";
-import { ThemeProvider, useStyles, i18n } from "expo-helpers";
+import { ThemeProvider, useStyles, i18n, config } from "expo-helpers";
+config.init({
+  fontSizes: {},
+});
 i18n.init({
   translations: {
     en: require("../src/translations/en.json"),

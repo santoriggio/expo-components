@@ -11,6 +11,8 @@ export default function () {
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text size="xs">Text</Text>
+
+        <Text size="">Text</Text>
         <Text size="s">Text</Text>
         <Text size="m">Text</Text>
         <Text size="l">Text</Text>

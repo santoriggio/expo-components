@@ -4,11 +4,12 @@ import {
   TextInputProps as RNTextInputProps,
   StyleSheet,
 } from "react-native";
-import useStyles, { fontSizes, spacingSizes } from "../hooks/useStyles";
+import useStyles, { spacingSizes } from "../hooks/useStyles";
 import { useMemo } from "react";
 import { SpacingProps } from "./Box";
+import config, { FontSizes } from "../utils/config";
 type TextInputProps = {
-  size?: keyof typeof fontSizes;
+  size?: keyof FontSizes | (string & {});
   color?: ColorValue;
 } & SpacingProps;
 
@@ -16,6 +17,7 @@ export default function TextInput(props: TextInputProps & RNTextInputProps) {
   const { color, size } = props;
   const { colors } = useStyles();
   const styles = useMemo(() => {
+    const fontSizes = config.getProperty("fontSizes");
     return StyleSheet.create({
       container: {
         fontSize: (size && fontSizes[size]) || fontSizes.m,
