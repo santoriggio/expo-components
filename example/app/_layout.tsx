@@ -1,7 +1,13 @@
 import { Stack } from "expo-router";
-import { ThemeProvider, useStyles, i18n } from "expo-helpers";
+import { ThemeProvider, useStyles, i18n, config } from "expo-helpers";
+config.init({
+  fontSizes: {},
+});
 i18n.init({
-  translations: {},
+  translations: {
+    en: require("../src/translations/en.json"),
+    it: require("../src/translations/it.json"),
+  },
 });
 export default function () {
   const { colors } = useStyles();

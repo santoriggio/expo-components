@@ -5,24 +5,63 @@ type Screen = {
   screenName: string;
   title: string;
 };
-const screens: Screen[] = [
+type Separator = {
+  title?: string;
+  separator: true;
+};
+const screens: (Screen | Separator)[] = [
+  {
+    separator: true,
+    title: "Components",
+  },
+  {
+    screenName: "box",
+    title: "📦 Box",
+  },
+  {
+    screenName: "text",
+    title: "📘 Text",
+  },
+  {
+    screenName: "button",
+    title: "🕹️ Button",
+  },
+  {
+    separator: true,
+    title: "Utils",
+  },
   {
     screenName: "i18n",
     title: "🎭 i18n",
   },
+  {
+    screenName: "theme",
+    title: "🤹 Themes",
+  },
 ];
+
+function isSeparator(component: any): component is Separator {
+  return typeof component.separator === "boolean" && component.separator;
+}
+
 export default function Page() {
   const { colors } = useStyles();
-  const renderItem: ListRenderItem<Screen> = ({ item }) => {
+  const renderItem: ListRenderItem<Screen | Separator> = ({ item }) => {
+    const is_separator = isSeparator(item);
     return (
       <Box
         padding="m"
         backgroundColor={colors.background}
+        disabled={is_separator}
         onPress={() => {
+          if (is_separator) {
+            return;
+          }
+
           router.push(item.screenName);
         }}
       >
-        <Text>{item.title}</Text>
+        <Text bold={is_separator}>{item.title}</Text>
       </Box>
     );
   };
@@ -31,7 +70,6 @@ export default function Page() {
       <Stack screenOptions={{ title: "expo-helpers" }} />
       <FlatList
         data={screens}
-        keyExtractor={(item) => item.title}
         contentInsetAdjustmentBehavior="automatic"
         automaticallyAdjustKeyboardInsets
         ItemSeparatorComponent={() => {

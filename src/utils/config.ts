@@ -1,11 +1,21 @@
 import { Colors, Theme } from "../hooks/useStyles";
 import deepMerge, { DeepPartial } from "./deepMerge";
 import Store from "./store";
+export type FontSizes = {
+  "xs": number;
+  "s": number;
+  "m": number;
+  "l": number;
+  "xl": number;
+  "2xl": number;
+  "3xl": number;
+};
 
 export type Config = {
   themes: Record<string, Theme>;
   colors: Colors;
   onChangeTheme?: (theme: string) => void;
+  fontSizes: FontSizes & Record<string, number>;
 };
 //Create a deep partial type
 
@@ -46,8 +56,19 @@ class ConfigClass {
       warning: "#ffcc00",
       gray: "#9C9C9C",
     },
+    fontSizes: {
+      "xs": 12,
+      "s": 14,
+      "m": 16,
+      "l": 18,
+      "xl": 20,
+      "2xl": 22,
+      "3xl": 24,
+    },
   };
+
   constructor() {}
+
   public getProperty<K extends keyof Config>(key: K): Config[K] {
     if (typeof this.config[key] === "undefined") {
       throw Error("Key not exists");

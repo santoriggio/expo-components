@@ -1,5 +1,6 @@
 import { Text, i18n } from "expo-helpers";
 import { ScrollView } from "react-native";
+
 export default function () {
   return (
     <>
@@ -8,6 +9,7 @@ export default function () {
         automaticallyAdjustKeyboardInsets
       >
         <Text>{i18n.locale}</Text>
+        <Text>{i18n.t("greetings")}</Text>
       </ScrollView>
     </>
   );
