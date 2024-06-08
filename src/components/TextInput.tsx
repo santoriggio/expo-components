@@ -43,6 +43,7 @@ export default function TextInput(props: TextInputProps & RNTextInputProps) {
       selectionColor={colors.primary}
       cursorColor={colors.primary}
       selectionHandleColor={colors.primary}
+      placeholderTextColor={colors.gray}
       {...props}
       style={[styles.container, props.style]}
     />

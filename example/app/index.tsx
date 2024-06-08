@@ -27,6 +27,10 @@ const screens: (Screen | Separator)[] = [
     title: "🕹️ Button",
   },
   {
+    screenName: "textinput",
+    title: "⌨️ TextInput",
+  },
+  {
     separator: true,
     title: "Utils",
   },
