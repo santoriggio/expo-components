@@ -35,7 +35,7 @@ const screens: (Screen | Separator)[] = [
     title: "🎭 i18n",
   },
   {
-    screenName: "theme",
+    screenName: "themes",
     title: "🤹 Themes",
   },
 ];

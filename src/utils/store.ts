@@ -22,6 +22,8 @@ class Store {
       const toReturn = this.mmkv_store.getString(key.toString());
 
       if (typeof toReturn !== "undefined") return JSON.parse(toReturn);
+
+      return null;
     }
   }
 

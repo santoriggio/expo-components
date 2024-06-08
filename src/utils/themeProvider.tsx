@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useColorScheme } from "react-native";
 import config from "./config";
 type ThemeCTX = {
   theme: string;
@@ -19,26 +20,37 @@ export function useTheme() {
 }
 
 export default function ThemeProvider(props: PropsWithChildren) {
-  const [theme, set] = useState<string>("light");
-
+  const colorScheme = useColorScheme();
+  const [theme, set] = useState<string>(config.store.get("theme") || "light");
   useEffect(() => {
-    getInitialTheme();
-  }, []);
-
-  const getInitialTheme = () => {
-    const initialTheme = config.store.get("theme");
-    const themes = config.getProperty("themes");
-
-    if (typeof themes[initialTheme] !== "undefined") {
-      set(initialTheme);
+    const currentTheme = config.store.get("theme");
+    if (currentTheme === null) {
+      //theme is set to automatic
+      set(colorScheme);
     }
-  };
+  }, [colorScheme]);
 
+  /**
+   * newTheme === null to set to "automatic"
+   */
   const setTheme = (newTheme: string) => {
+    if (newTheme === null || newTheme === "_automatic") {
+      //if newTheme is set to automatic remove the key from the store
+      config.store.remove("theme");
+      set(colorScheme);
+
+      const onChangeTheme = config.getProperty("onChangeTheme");
+      if (typeof onChangeTheme === "function") {
+        onChangeTheme(newTheme);
+      }
+
+      return;
+    }
     const themes = config.getProperty("themes");
 
     if (typeof themes[newTheme] === "undefined") {
-      throw Error("Theme not exists");
+      console.warn(`${newTheme} not exists`);
+      return;
     }
 
     config.store.set("theme", newTheme);

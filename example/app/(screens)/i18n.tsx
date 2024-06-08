@@ -5,7 +5,7 @@ import { ScrollView } from "react-native";
 export default function () {
   return (
     <>
-      <Stack.Screen options={{ title: "Text" }} />
+      <Stack.Screen options={{ title: "i18n" }} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         automaticallyAdjustKeyboardInsets

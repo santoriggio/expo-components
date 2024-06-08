@@ -39,6 +39,7 @@ export default function useStyles() {
   const { theme } = useTheme();
   const styles: Styles = useMemo(() => {
     const themes = config.getProperty("themes");
+
     const colors = config.getProperty("colors");
     const fontSizes = config.getProperty("fontSizes");
     return {

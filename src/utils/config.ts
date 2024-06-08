@@ -69,11 +69,10 @@ class ConfigClass {
 
   constructor() {}
 
-  public getProperty<K extends keyof Config>(key: K): Config[K] {
+  public getProperty<K extends keyof Config>(key: K): Config[K] | null {
     if (typeof this.config[key] === "undefined") {
-      throw Error("Key not exists");
+      return null;
     }
-
     return this.config[key];
   }
   public init(config: DeepPartial<Config>) {

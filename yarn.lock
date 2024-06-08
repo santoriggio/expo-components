@@ -3562,6 +3562,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/normalize-colors@npm:0.74.84":
+  version: 0.74.84
+  resolution: "@react-native/normalize-colors@npm:0.74.84"
+  checksum: e9a7b3020e6a298ba1c7310d267ef90c39327cb2ed7899bf3778224e52b280802899420dbf36fb8c1a37914f410be0187a9796c1790c1dca86404a40a948235a
+  languageName: node
+  linkType: hard
+
 "@react-native/virtualized-lists@npm:0.74.83":
   version: 0.74.83
   resolution: "@react-native/virtualized-lists@npm:0.74.83"
@@ -8672,6 +8679,7 @@ __metadata:
     expo-localization: ~15.0.3
     expo-router: ^3.5.14
     expo-status-bar: ^1.12.1
+    expo-system-ui: ^3.0.6
     react: 18.2.0
     react-dom: 18.2.0
     react-native: 0.74.1
@@ -8943,6 +8951,18 @@ __metadata:
   version: 1.12.1
   resolution: "expo-status-bar@npm:1.12.1"
   checksum: 82f2e9096660cdb521b920662908b93e1909c2bbe776802c314dff6e0863300d19ba4b9e093825b2bdc094f333010df0b8ed11fcb330e4c29a16c2d55da0aa96
+  languageName: node
+  linkType: hard
+
+"expo-system-ui@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "expo-system-ui@npm:3.0.6"
+  dependencies:
+    "@react-native/normalize-colors": 0.74.84
+    debug: ^4.3.2
+  peerDependencies:
+    expo: "*"
+  checksum: 7160d92ee7ff9039a87e9386fd00ca6aa4eb59ad8530e9ff05f61f27941c73f597e3be155630650b503a6b26f7a9369eab697d9ff7c0880761dc1080358ebf8d
   languageName: node
   linkType: hard
 
