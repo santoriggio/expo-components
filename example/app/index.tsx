@@ -67,7 +67,7 @@ export default function Page() {
   };
   return (
     <>
-      <Stack screenOptions={{ title: "expo-helpers" }} />
+      <Stack.Screen options={{ title: "Expo-helpers" }} />
       <FlatList
         data={screens}
         contentInsetAdjustmentBehavior="automatic"

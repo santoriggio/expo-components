@@ -5,7 +5,7 @@ export default function () {
   const { colors } = useStyles();
   return (
     <>
-      <Stack />
+      <Stack.Screen options={{ title: "Theme" }} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         {Object.keys(colors).map((color_key) => {
           const color = colors[color_key];

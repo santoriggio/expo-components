@@ -4,8 +4,8 @@ import { Text } from "expo-helpers";
 export default function () {
   return (
     <>
-      <Stack
-        screenOptions={{
+      <Stack.Screen
+        options={{
           title: "Text",
         }}
       />

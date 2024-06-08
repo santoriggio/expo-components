@@ -61,7 +61,7 @@ export default function () {
   const { spacing } = useStyles();
   return (
     <>
-      <Stack screenOptions={{ title: "Button" }} />
+      <Stack.Screen options={{ title: "Button" }} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ padding: spacing.m }}
